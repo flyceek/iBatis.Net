@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{2A21A6C2-682A-4455-88A1-114AAE17E94B}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>IBatisNet.DataMapper</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.DynamicProxy">
+      <HintPath>..\lib\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.Common">
+      <HintPath>..\lib\IBatisNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IBatisNet.DataMapper.Commands\DataReaderDecorator.cs" />
+    <Compile Include="IBatisNet.DataMapper.Commands\DataReaderTransformer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Commands\DbCommandDecorator.cs" />
+    <Compile Include="IBatisNet.DataMapper.Commands\DefaultPreparedCommand.cs" />
+    <Compile Include="IBatisNet.DataMapper.Commands\InMemoryDataReader.cs" />
+    <Compile Include="IBatisNet.DataMapper.Commands\IPreparedCommand.cs" />
+    <Compile Include="IBatisNet.DataMapper.Commands\PreparedCommandFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Alias\TypeAlias.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Alias\TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache.Fifo\FifoCacheController.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache.Lru\LruCacheController.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache.Memory\MemoryCacheControler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache.Memory\MemoryCacheLevel.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache\CacheKey.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache\CacheModel.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache\FlushInterval.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Cache\ICacheController.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ParameterMapping\InlineParameterMapParser.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ParameterMapping\ParameterMap.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ParameterMapping\ParameterProperty.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ParameterMapping\ParameterPropertyCollection.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\ArgumentProperty.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\AutoResultMap.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\Discriminator.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\IResultMap.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\NullResultMap.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\ResultMap.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\ResultMapCollection.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\ResultProperty.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\ResultPropertyCollection.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.ResultMapping\SubMap.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\ArgumentPropertyDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\CacheModelDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\DeleteDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\DeSerializerFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\DiscriminatorDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\DynamicDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\InsertDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsEmptyDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsEqualDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsGreaterEqualDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsGreaterThanDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsLessEqualDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsLessThanDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsNotEmptyDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsNotEqualDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsNotNullDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsNotParameterPresentDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsNotPropertyAvailableDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsNullDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsParameterPresentDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IsPropertyAvailableDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\IterateSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\ParameterMapDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\ParameterPropertyDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\ProcedureDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\ResultMapDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\ResultPropertyDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\SelectDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\SqlDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\StatementDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\SubMapDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\TypeAliasDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\TypeHandlerDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Serializers\UpdateDeSerializer.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\BaseTag.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\Conditional.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\Dynamic.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IDynamicParent.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsEmpty.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsEqual.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsGreaterEqual.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsGreaterThan.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsLessEqual.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsLessThan.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsNotEmpty.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsNotEqual.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsNotNull.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsNotParameterPresent.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsNotPropertyAvailable.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsNull.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsParameterPresent.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\IsPropertyAvailable.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\Iterate.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements\SqlTag.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\BaseTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\ConditionalTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\DynamicTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsEmptyTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsEqualTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsGreaterEqualTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsGreaterThanTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsLessEqualTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsLessThanTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsNotEmptyTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsNotEqualTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsNotNullTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsNotParameterPresentTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsNotPropertyAvailableTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsNullTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsParameterPresentTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IsPropertyAvailableTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\ISqlTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IterateContext.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\IterateTagHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers\SqlTagContext.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic\DynamicSql.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic\ISqlChild.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Dynamic\SqlText.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.SimpleDynamic\SimpleDynamicSql.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Static\ProcedureSql.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql.Static\StaticSql.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Sql\ISql.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Delete.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Generate.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Insert.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\IStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\PreparedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\PreparedStatementFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Procedure.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Select.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\SelectKey.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\SqlGenerator.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Statement.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration.Statements\Update.cs" />
+    <Compile Include="IBatisNet.DataMapper.Configuration\DomSqlMapBuilder.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\BaseDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\ComplexDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\DataExchangeFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\DictionaryDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\DotNetObjectDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\IDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\ListDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.DataExchange\PrimitiveDataExchange.cs" />
+    <Compile Include="IBatisNet.DataMapper.Exceptions\DataMapperException.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\ArgumentStrategyFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\DefaultStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\IArgumentStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\ResultMapStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\SelectArrayStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\SelectGenericListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\SelectListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\SelectObjectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ArgumentStrategy\SelectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\ArrayStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\GenericListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\IPostSelectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\ListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\ObjectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\PostSelectStrategyFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PostSelectStrategy\StrongTypedListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertStrategy\GroupByStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\DefaultStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\IPropertyStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\PropertyStrategyFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\ResultMapStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\SelectArrayStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\SelectGenericListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\SelectListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\SelectObjectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.PropertyStrategy\SelectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\AutoMapStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\DictionaryStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\GroupByStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\IResultStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\ListStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\MapStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\ObjectStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\ResultClassStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\ResultMapStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\ResultStrategyFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements.ResultStrategy\SimpleTypeStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\BaseStrategy.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\CachingStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\DeleteMappedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\ExecuteEventHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\IMappedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\InsertMappedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\MappedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\PaginatedList.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\PostBindind.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\ReaderAutoMapper.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\SelectMappedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.MappedStatements\UpdateMappedStatement.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\ILazyFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyFactoryBuilder.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyList.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyListFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyListGeneric.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyListGenericFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyLoadInterceptor.cs" />
+    <Compile Include="IBatisNet.DataMapper.Proxy\LazyLoadProxyFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.Scope\ConfigurationScope.cs" />
+    <Compile Include="IBatisNet.DataMapper.Scope\ErrorContext.cs" />
+    <Compile Include="IBatisNet.DataMapper.Scope\IScope.cs" />
+    <Compile Include="IBatisNet.DataMapper.Scope\RequestScope.cs" />
+    <Compile Include="IBatisNet.DataMapper.SessionStore\AbstractSessionStore.cs" />
+    <Compile Include="IBatisNet.DataMapper.SessionStore\CallContextSessionStore.cs" />
+    <Compile Include="IBatisNet.DataMapper.SessionStore\HybridWebThreadSessionStore.cs" />
+    <Compile Include="IBatisNet.DataMapper.SessionStore\ISessionStore.cs" />
+    <Compile Include="IBatisNet.DataMapper.SessionStore\SessionStoreFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.SessionStore\WebSessionStore.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableBooleanTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableByteTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableCharTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableDateTimeTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableDecimalTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableDoubleTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableGuidTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableInt16TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableInt32TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableInt64TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableSByteTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableSingleTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableTimeSpanTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableUInt16TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableUInt32TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers.Nullables\NullableUInt64TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\AnsiStringTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\BaseTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\BooleanTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ByteArrayTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ByteTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\CharTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\CustomTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\DateTimeTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\DBNullTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\DecimalTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\DoubleTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\EnumTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\GuidTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\Int16TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\Int32TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\Int64TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\IParameterSetter.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\IResultGetter.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ITypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ITypeHandlerCallback.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ObjectTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ParameterSetterImpl.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\ResultGetterImpl.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\SByteTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\SingleTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\StringTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\TimeSpanTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\TypeHandlerFactory.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\UInt16TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\UInt32TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\UInt64TypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper.TypeHandlers\UnknownTypeHandler.cs" />
+    <Compile Include="IBatisNet.DataMapper\CacheKeyType.cs" />
+    <Compile Include="IBatisNet.DataMapper\DictionaryRowDelegate.cs" />
+    <Compile Include="IBatisNet.DataMapper\ExecuteEventArgs.cs" />
+    <Compile Include="IBatisNet.DataMapper\ISqlMapper.cs" />
+    <Compile Include="IBatisNet.DataMapper\ISqlMapSession.cs" />
+    <Compile Include="IBatisNet.DataMapper\Mapper.cs" />
+    <Compile Include="IBatisNet.DataMapper\RowDelegate.cs" />
+    <Compile Include="IBatisNet.DataMapper\SelectKeyType.cs" />
+    <Compile Include="IBatisNet.DataMapper\SqlMapper.cs" />
+    <Compile Include="IBatisNet.DataMapper\SqlMapSession.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IBatisNet.DataMapper\SqlMap.xsd" />
+    <EmbeddedResource Include="IBatisNet.DataMapper\SqlMapConfig.xsd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
