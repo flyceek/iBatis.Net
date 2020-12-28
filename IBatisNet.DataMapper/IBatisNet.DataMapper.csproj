@@ -28,9 +28,6 @@
     <Reference Include="Castle.DynamicProxy">
       <HintPath>..\lib\Castle.DynamicProxy.dll</HintPath>
     </Reference>
-    <Reference Include="IBatisNet.Common">
-      <HintPath>..\lib\IBatisNet.Common.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="System" />
@@ -304,6 +301,12 @@
   <ItemGroup>
     <EmbeddedResource Include="IBatisNet.DataMapper\SqlMap.xsd" />
     <EmbeddedResource Include="IBatisNet.DataMapper\SqlMapConfig.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IBatisNet.Common\IBatisNet.Common.csproj">
+      <Project>{a416a633-b144-4ba0-8d9b-f1ce62f20406}</Project>
+      <Name>IBatisNet.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
