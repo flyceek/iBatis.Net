@@ -1,0 +1,11 @@
+E:\work\C#代码\ibatis-net\IBatisNet.Common\obj\Debug\net40\IBatisNet.Common.csproj.CoreCompileInputs.cache
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\IBatisNet.Common.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\IBatisNet.Common.pdb
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\Castle.DynamicProxy.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\System.Configuration.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\System.Data.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\System.EnterpriseServices.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\bin\Debug\net40\System.Xml.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\obj\Debug\net40\IBatisNet.Common.csproj.CopyComplete
+E:\work\C#代码\ibatis-net\IBatisNet.Common\obj\Debug\net40\IBatisNet.Common.dll
+E:\work\C#代码\ibatis-net\IBatisNet.Common\obj\Debug\net40\IBatisNet.Common.pdb
