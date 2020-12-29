@@ -1,10 +1,19 @@
 using IBatisNet.DataMapper.Scope;
 using System;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper.Commands
 {
-	public class DbCommandDecorator : IDbCommand, System.IDisposable
+	public interface IDbCommandDecorator : IDbCommand, System.IDisposable
+	{
+		Task<IDataReader> ExecuteReaderAsync();
+
+	}
+
+	public class DbCommandDecorator : IDbCommandDecorator
 	{
 		private IDbCommand _innerDbCommand = null;
 
@@ -123,6 +132,14 @@ namespace IBatisNet.DataMapper.Commands
 			this._request.Session.OpenConnection();
 			this._request.MoveNextResultMap();
 			return new DataReaderDecorator(this._innerDbCommand.ExecuteReader(), this._request);
+		}
+
+		public async Task<IDataReader> ExecuteReaderAsync()
+		{ 
+			this._request.Session.OpenConnection(); 
+			this._request.MoveNextResultMap();
+			var dbDataReader = (this._innerDbCommand as DbCommand).ExecuteReaderAsync();
+			return new DataReaderDecorator(await dbDataReader, this._request);
 		}
 
 		object IDbCommand.ExecuteScalar()

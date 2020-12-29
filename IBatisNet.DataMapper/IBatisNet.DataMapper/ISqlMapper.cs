@@ -14,6 +14,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper
 {
@@ -150,6 +151,8 @@ namespace IBatisNet.DataMapper
 		System.Collections.IList QueryForList(string statementName, object parameterObject);
 
 		System.Collections.IList QueryForList(string statementName, object parameterObject, int skipResults, int maxResults);
+
+		Task<System.Collections.Generic.IList<T>> QueryForListAsync<T>(string statementName, object parameterObject);
 
 		System.Collections.IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty);
 

@@ -137,7 +137,7 @@ namespace IBatisNet.DataMapper.Proxy
 					if (LazyListGeneric<T>._logger.IsDebugEnabled)
 					{
 						LazyListGeneric<T>._logger.Debug("Proxyfying call, query statement " + this._statementId);
-					}
+					}				
 					this._list = this._sqlMap.QueryForList<T>(this._statementId, this._param);
 					this._loaded = true;
 					this._setAccessor.Set(this._target, this._list);

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper
 {
@@ -723,9 +724,39 @@ namespace IBatisNet.DataMapper
 			}
 			System.Collections.Generic.IList<T> result;
 			try
-			{
+			{	
 				IMappedStatement mappedStatement = this.GetMappedStatement(statementName);
 				result = mappedStatement.ExecuteQueryForList<T>(sqlMapSession, parameterObject);
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				if (flag)
+				{
+					sqlMapSession.CloseConnection();
+				}
+			}
+			return result;
+		}
+
+		public async Task<System.Collections.Generic.IList<T>> QueryForListAsync<T>(string statementName, object parameterObject)
+		{
+			bool flag = false;
+			ISqlMapSession sqlMapSession = this._sessionStore.LocalSession;
+			if (sqlMapSession == null)
+			{
+				sqlMapSession = this.CreateSqlMapSession();
+				flag = true;
+			}
+			System.Collections.Generic.IList<T> result;
+			try
+			{
+
+				IMappedStatement mappedStatement = this.GetMappedStatement(statementName);
+				result =await mappedStatement.ExecuteQueryForListAsync<T>(sqlMapSession, parameterObject);
 			}
 			catch
 			{

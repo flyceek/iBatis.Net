@@ -3,6 +3,7 @@ using IBatisNet.DataMapper.Configuration.Statements;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper.MappedStatements
 {
@@ -51,7 +52,7 @@ namespace IBatisNet.DataMapper.MappedStatements
 		System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, int skipResults, int maxResults);
 
 		System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject);
-
+		Task<System.Collections.Generic.IList<T>> ExecuteQueryForListAsync<T>(ISqlMapSession session, object parameterObject);
 		object ExecuteQueryForObject(ISqlMapSession session, object parameterObject);
 
 		object ExecuteQueryForObject(ISqlMapSession session, object parameterObject, object resultObject);

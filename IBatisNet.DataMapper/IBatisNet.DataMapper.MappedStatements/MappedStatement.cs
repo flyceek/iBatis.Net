@@ -11,7 +11,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper.MappedStatements
 {
@@ -386,6 +389,14 @@ namespace IBatisNet.DataMapper.MappedStatements
 			return this.RunQueryForList<T>(requestScope, session, parameterObject, null, null);
 		}
 
+		public virtual async Task<System.Collections.Generic.IList<T>> ExecuteQueryForListAsync<T>(ISqlMapSession session, object parameterObject)
+		{
+
+			RequestScope requestScope = this._statement.Sql.GetRequestScope(this, parameterObject, session);
+			this._preparedCommand.Create(requestScope, session, this.Statement, parameterObject);
+			return await this.RunQueryForListAsync<T>(requestScope, session, parameterObject, null, null);
+		}
+
 		public virtual System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
 		{
 			RequestScope requestScope = this._statement.Sql.GetRequestScope(this, parameterObject, session);
@@ -394,6 +405,56 @@ namespace IBatisNet.DataMapper.MappedStatements
 		}
 
 		internal System.Collections.Generic.IList<T> RunQueryForList<T>(RequestScope request, ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
+		{
+			System.Collections.Generic.IList<T> list = null;
+			using (IDbCommand iDbCommand = request.IDbCommand)
+			{
+				if (this._statement.ListClass == null)
+				{
+					list = new System.Collections.Generic.List<T>();
+				}
+				else
+				{
+					list = this._statement.CreateInstanceOfGenericListClass<T>();
+				}
+				IDataReader dataReader = iDbCommand.ExecuteReader();
+				try
+				{
+					for (int i = 0; i < skipResults; i++)
+					{
+						if (!dataReader.Read())
+						{
+							break;
+						}
+					}
+					int num = 0;
+					while ((maxResults == -1 || num < maxResults) && dataReader.Read())
+					{
+						object obj = this._resultStrategy.Process(request, ref dataReader, null);
+						if (obj != BaseStrategy.SKIP)
+						{
+							list.Add((T)((object)obj));
+						}
+						num++;
+					}
+				}
+				catch
+				{
+					throw;
+				}
+				finally
+				{
+					dataReader.Close();
+					dataReader.Dispose();
+				}
+				this.ExecutePostSelect(request);
+				this.RetrieveOutputParameters(request, session, iDbCommand, parameterObject);
+			}
+			return list;
+		}
+
+
+		internal async Task<System.Collections.Generic.IList<T>> RunQueryForListAsync<T>(RequestScope request, ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
 		{
 			System.Collections.Generic.IList<T> list = null;
 			using (IDbCommand iDbCommand = request.IDbCommand)
@@ -478,6 +539,7 @@ namespace IBatisNet.DataMapper.MappedStatements
 						{
 							while (dataReader.Read())
 							{
+
 								T t = (T)((object)this._resultStrategy.Process(request, ref dataReader, null));
 								rowDelegate(t, parameterObject, list);
 							}
@@ -499,6 +561,71 @@ namespace IBatisNet.DataMapper.MappedStatements
 			}
 			return list;
 		}
+
+		internal async Task<System.Collections.Generic.IList<T>> RunQueryForListAsync<T>(RequestScope request, ISqlMapSession session, object parameterObject, System.Collections.Generic.IList<T> resultObject, RowDelegate<T> rowDelegate)
+		{
+			System.Collections.Generic.IList<T> list = resultObject;
+
+			IDbCommandDecorator dbCommand = (IDbCommandDecorator)(request.IDbCommand);
+
+			using (IDbCommandDecorator iDbCommand = dbCommand)
+			{
+				if (resultObject == null)
+				{
+					if (this._statement.ListClass == null)
+					{
+						list = new System.Collections.Generic.List<T>();
+					}
+					else
+					{
+						list = this._statement.CreateInstanceOfGenericListClass<T>();
+					}
+				}
+				IDataReader dataReader =(await iDbCommand.ExecuteReaderAsync());
+				IDataReaderDecorator dataReaderDecorator = (IDataReaderDecorator)dataReader;
+				try
+				{
+					do
+					{
+						if (rowDelegate == null)
+						{
+							while (await dataReaderDecorator.ReadAsync())
+							{
+								
+								object obj = this._resultStrategy.Process(request, ref dataReader, null);
+								if (obj != BaseStrategy.SKIP)
+								{
+									list.Add((T)((object)obj));
+								}
+							}
+						}
+						else
+						{
+							while (await dataReaderDecorator.ReadAsync())
+							{
+								T t = (T)((object)this._resultStrategy.Process(request, ref dataReader, null));
+								rowDelegate(t, parameterObject, list);
+							}
+						}
+					}
+					while (dataReader.NextResult());
+				}
+				catch
+				{
+					throw;
+				}
+				finally
+				{
+					dataReader.Close();
+					dataReader.Dispose();
+				}
+				this.ExecutePostSelect(request);
+				this.RetrieveOutputParameters(request, session, iDbCommand, parameterObject);
+			}
+			return list;
+		}
+
+
 
 		public virtual void ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, System.Collections.Generic.IList<T> resultObject)
 		{

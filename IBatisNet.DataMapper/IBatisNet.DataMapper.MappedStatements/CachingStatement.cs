@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper.MappedStatements
 {
@@ -137,15 +138,20 @@ namespace IBatisNet.DataMapper.MappedStatements
 			return list;
 		}
 
+
 		public System.Collections.IList ExecuteQueryForList(ISqlMapSession session, object parameterObject)
 		{
 			return this.ExecuteQueryForList(session, parameterObject, -1, -1);
 		}
 
+ 
+
 		public void ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, System.Collections.Generic.IList<T> resultObject)
 		{
 			this._mappedStatement.ExecuteQueryForList<T>(session, parameterObject, resultObject);
 		}
+
+
 
 		public System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
 		{
@@ -164,9 +170,34 @@ namespace IBatisNet.DataMapper.MappedStatements
 			return list;
 		}
 
+		public async Task<System.Collections.Generic.IList<T>> ExecuteQueryForListAsync<T>(ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
+		{
+			RequestScope requestScope = this.Statement.Sql.GetRequestScope(this, parameterObject, session);
+			this._mappedStatement.PreparedCommand.Create(requestScope, session, this.Statement, parameterObject);
+			CacheKey cacheKey = this.GetCacheKey(requestScope);
+			cacheKey.Update("ExecuteQueryForList");
+			cacheKey.Update(skipResults);
+			cacheKey.Update(maxResults);
+			System.Collections.Generic.IList<T> list = this.Statement.CacheModel[cacheKey] as System.Collections.Generic.IList<T>;
+			if (list == null)
+			{
+				list =await this._mappedStatement.RunQueryForListAsync<T>(requestScope, session, parameterObject, skipResults, maxResults);
+				this.Statement.CacheModel[cacheKey] = list;
+			}
+			return list;
+		}
+
 		public System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject)
 		{
+
 			return this.ExecuteQueryForList<T>(session, parameterObject, -1, -1);
+		}
+
+
+		public async Task< System.Collections.Generic.IList<T>> ExecuteQueryForListAsync<T>(ISqlMapSession session, object parameterObject)
+		{
+
+			return await this.ExecuteQueryForListAsync<T>(session, parameterObject, -1, -1);
 		}
 
 		public object ExecuteQueryForObject(ISqlMapSession session, object parameterObject)

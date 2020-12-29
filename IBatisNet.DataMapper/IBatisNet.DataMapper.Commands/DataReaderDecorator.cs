@@ -1,10 +1,18 @@
 using IBatisNet.DataMapper.Scope;
 using System;
 using System.Data;
+using System.Data.Common;
+using System.Threading.Tasks;
 
 namespace IBatisNet.DataMapper.Commands
 {
-	public class DataReaderDecorator : IDataReader, System.IDisposable, IDataRecord
+	public interface IDataReaderDecorator : IDataReader, System.IDisposable, IDataRecord
+	{
+		Task<bool> ReadAsync();
+
+	}
+
+	public class DataReaderDecorator : IDataReaderDecorator
 	{
 		private IDataReader _innerDataReader = null;
 
@@ -83,6 +91,11 @@ namespace IBatisNet.DataMapper.Commands
 		bool IDataReader.Read()
 		{
 			return this._innerDataReader.Read();
+		}
+
+		public async Task<bool> ReadAsync()
+		{
+			return await ((DbDataReader)this._innerDataReader).ReadAsync();
 		}
 
 		void System.IDisposable.Dispose()
