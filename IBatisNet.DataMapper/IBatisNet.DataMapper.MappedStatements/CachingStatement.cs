@@ -138,20 +138,15 @@ namespace IBatisNet.DataMapper.MappedStatements
 			return list;
 		}
 
-
 		public System.Collections.IList ExecuteQueryForList(ISqlMapSession session, object parameterObject)
 		{
 			return this.ExecuteQueryForList(session, parameterObject, -1, -1);
 		}
 
- 
-
 		public void ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, System.Collections.Generic.IList<T> resultObject)
 		{
 			this._mappedStatement.ExecuteQueryForList<T>(session, parameterObject, resultObject);
 		}
-
-
 
 		public System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
 		{
@@ -189,7 +184,6 @@ namespace IBatisNet.DataMapper.MappedStatements
 
 		public System.Collections.Generic.IList<T> ExecuteQueryForList<T>(ISqlMapSession session, object parameterObject)
 		{
-
 			return this.ExecuteQueryForList<T>(session, parameterObject, -1, -1);
 		}
 
