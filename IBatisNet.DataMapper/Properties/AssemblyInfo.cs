@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 
-[assembly: System.Reflection.AssemblyVersion("1.6.3.1")]
+[assembly: AssemblyVersion("1.6.3.2")]
 [assembly: System.CLSCompliant(true)]
 [assembly: System.Diagnostics.Debuggable(System.Diagnostics.DebuggableAttribute.DebuggingModes.Default | System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations | System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints | System.Diagnostics.DebuggableAttribute.DebuggingModes.EnableEditAndContinue)]
 [assembly: System.Reflection.AssemblyCompany("http://ibatis.apache.org/")]

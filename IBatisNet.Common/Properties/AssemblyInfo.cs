@@ -14,4 +14,4 @@ using System.Runtime.Versioning;
 [assembly: Debuggable(DebuggableAttribute.DebuggingModes.Default | DebuggableAttribute.DebuggingModes.DisableOptimizations | DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints | DebuggableAttribute.DebuggingModes.EnableEditAndContinue)]
 [assembly: CLSCompliant(true)]
 [assembly: AssemblyCompany("http://ibatis.apache.org/")]
-[assembly: AssemblyVersion("1.6.2.0")]
+[assembly: AssemblyVersion("1.6.2.1")]
