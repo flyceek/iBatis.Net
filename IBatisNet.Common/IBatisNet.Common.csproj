@@ -8,6 +8,9 @@
     <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\IBatisNet.Common.xml</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.DynamicProxy">
       <HintPath>..\lib\Castle.DynamicProxy.dll</HintPath>
