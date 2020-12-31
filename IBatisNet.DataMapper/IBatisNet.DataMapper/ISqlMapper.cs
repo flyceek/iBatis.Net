@@ -185,6 +185,8 @@ namespace IBatisNet.DataMapper
 
 		T QueryForObject<T>(string statementName, object parameterObject);
 
+		Task<T> QueryForObjectAsync<T>(string statementName, object parameterObject);
+
 		System.Collections.Generic.IList<T> QueryForList<T>(string statementName, object parameterObject);
 
 		void QueryForList<T>(string statementName, object parameterObject, System.Collections.Generic.IList<T> resultObject);

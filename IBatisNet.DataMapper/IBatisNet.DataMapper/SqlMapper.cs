@@ -488,6 +488,35 @@ namespace IBatisNet.DataMapper
 			return result;
 		}
 
+		public async Task<T> QueryForObjectAsync<T>(string statementName, object parameterObject)
+		{
+			bool flag = false;
+			ISqlMapSession sqlMapSession = this._sessionStore.LocalSession;
+			if (sqlMapSession == null)
+			{
+				sqlMapSession = this.CreateSqlMapSession();
+				flag = true;
+			}
+			T result;
+			try
+			{
+				IMappedStatement mappedStatement = this.GetMappedStatement(statementName);
+				result = await mappedStatement.ExecuteQueryForObjectAsync<T>(sqlMapSession, parameterObject);
+			}
+			catch
+			{
+				throw;
+			}
+			finally
+			{
+				if (flag)
+				{
+					sqlMapSession.CloseConnection();
+				}
+			}
+			return result;
+		}
+
 		public T QueryForObject<T>(string statementName, object parameterObject, T instanceObject)
 		{
 			bool flag = false;

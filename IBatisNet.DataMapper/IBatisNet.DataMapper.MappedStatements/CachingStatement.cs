@@ -223,6 +223,11 @@ namespace IBatisNet.DataMapper.MappedStatements
 			return this.ExecuteQueryForObject<T>(session, parameterObject, default(T));
 		}
 
+		public async Task<T> ExecuteQueryForObjectAsync<T>(ISqlMapSession session, object parameterObject)
+		{
+			return await this.ExecuteQueryForObjectAsync<T>(session, parameterObject, default(T));
+		}
+
 		public T ExecuteQueryForObject<T>(ISqlMapSession session, object parameterObject, T resultObject)
 		{
 			T t = default(T);
@@ -242,6 +247,30 @@ namespace IBatisNet.DataMapper.MappedStatements
 			else
 			{
 				t = this._mappedStatement.RunQueryForObject<T>(requestScope, session, parameterObject, resultObject);
+				this.Statement.CacheModel[cacheKey] = t;
+			}
+			return t;
+		}
+
+		public async Task<T> ExecuteQueryForObjectAsync<T>(ISqlMapSession session, object parameterObject, T resultObject)
+		{
+			T t = default(T);
+			RequestScope requestScope = this.Statement.Sql.GetRequestScope(this, parameterObject, session);
+			this._mappedStatement.PreparedCommand.Create(requestScope, session, this.Statement, parameterObject);
+			CacheKey cacheKey = this.GetCacheKey(requestScope);
+			cacheKey.Update("ExecuteQueryForObject");
+			object obj = this.Statement.CacheModel[cacheKey];
+			if (obj is T)
+			{
+				t = (T)((object)obj);
+			}
+			else if (obj == CacheModel.NULL_OBJECT)
+			{
+				t = default(T);
+			}
+			else
+			{
+				t = await this._mappedStatement.RunQueryForObjectAsync<T>(requestScope, session, parameterObject, resultObject);
 				this.Statement.CacheModel[cacheKey] = t;
 			}
 			return t;

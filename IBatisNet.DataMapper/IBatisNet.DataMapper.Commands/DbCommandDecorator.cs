@@ -138,8 +138,9 @@ namespace IBatisNet.DataMapper.Commands
 		{ 
 			this._request.Session.OpenConnection(); 
 			this._request.MoveNextResultMap();
-			var dbDataReader = (this._innerDbCommand as DbCommand).ExecuteReaderAsync();
-			return new DataReaderDecorator(await dbDataReader, this._request);
+			var dbCommand  = this._innerDbCommand as DbCommand;
+			var dbDataReader =await  dbCommand.ExecuteReaderAsync();
+			return new DataReaderDecorator(dbDataReader, this._request);
 		}
 
 		object IDbCommand.ExecuteScalar()

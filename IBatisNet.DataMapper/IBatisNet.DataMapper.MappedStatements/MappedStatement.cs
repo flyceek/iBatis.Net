@@ -180,12 +180,25 @@ namespace IBatisNet.DataMapper.MappedStatements
 			return this.ExecuteQueryForObject<T>(session, parameterObject, default(T));
 		}
 
+		public virtual async Task<T> ExecuteQueryForObjectAsync<T>(ISqlMapSession session, object parameterObject)
+		{
+			return await this.ExecuteQueryForObjectAsync<T>(session, parameterObject, default(T));
+		}
+
 		public virtual T ExecuteQueryForObject<T>(ISqlMapSession session, object parameterObject, T resultObject)
 		{
 			T t = default(T);
 			RequestScope requestScope = this._statement.Sql.GetRequestScope(this, parameterObject, session);
 			this._preparedCommand.Create(requestScope, session, this.Statement, parameterObject);
 			return this.RunQueryForObject<T>(requestScope, session, parameterObject, resultObject);
+		}
+
+		public virtual async Task<T> ExecuteQueryForObjectAsync<T>(ISqlMapSession session, object parameterObject, T resultObject)
+		{
+			T t = default(T);
+			RequestScope requestScope = this._statement.Sql.GetRequestScope(this, parameterObject, session);
+			this._preparedCommand.Create(requestScope, session, this.Statement, parameterObject);
+			return await this.RunQueryForObjectAsync<T>(requestScope, session, parameterObject, resultObject);
 		}
 
 		internal T RunQueryForObject<T>(RequestScope request, ISqlMapSession session, object parameterObject, T resultObject)
@@ -213,6 +226,41 @@ namespace IBatisNet.DataMapper.MappedStatements
 				{
 					dataReader.Close();
 					dataReader.Dispose();
+				}
+				this.ExecutePostSelect(request);
+				this.RetrieveOutputParameters(request, session, iDbCommand, parameterObject);
+			}
+			this.RaiseExecuteEvent();
+			return result;
+		}
+
+		internal async Task<T> RunQueryForObjectAsync<T>(RequestScope request, ISqlMapSession session, object parameterObject, T resultObject)
+		{
+			T result = resultObject;
+			IDbCommandDecorator dbCommand = (IDbCommandDecorator)request.IDbCommand;
+			using (IDbCommandDecorator iDbCommand = dbCommand)
+			{
+				IDataReader dataReader =await iDbCommand.ExecuteReaderAsync();
+				IDataReaderDecorator dataReaderDecorator = (IDataReaderDecorator)dataReader;
+				try
+				{
+					while (await dataReaderDecorator.ReadAsync())
+					{
+						object obj = this._resultStrategy.Process(request, ref dataReader, resultObject);
+						if (obj != BaseStrategy.SKIP)
+						{
+							result = (T)((object)obj);
+						}
+					}
+				}
+				catch
+				{
+					throw;
+				}
+				finally
+				{
+					dataReaderDecorator.Close();
+					dataReaderDecorator.Dispose();
 				}
 				this.ExecutePostSelect(request);
 				this.RetrieveOutputParameters(request, session, iDbCommand, parameterObject);
@@ -457,7 +505,8 @@ namespace IBatisNet.DataMapper.MappedStatements
 		internal async Task<System.Collections.Generic.IList<T>> RunQueryForListAsync<T>(RequestScope request, ISqlMapSession session, object parameterObject, int skipResults, int maxResults)
 		{
 			System.Collections.Generic.IList<T> list = null;
-			using (IDbCommand iDbCommand = request.IDbCommand)
+			IDbCommandDecorator dbCommand = (IDbCommandDecorator)request.IDbCommand;
+			using (IDbCommandDecorator iDbCommand = dbCommand)
 			{
 				if (this._statement.ListClass == null)
 				{
@@ -467,18 +516,19 @@ namespace IBatisNet.DataMapper.MappedStatements
 				{
 					list = this._statement.CreateInstanceOfGenericListClass<T>();
 				}
-				IDataReader dataReader = iDbCommand.ExecuteReader();
+				IDataReader dataReader =await iDbCommand.ExecuteReaderAsync();
+				IDataReaderDecorator dataReaderDecorator = (IDataReaderDecorator)dataReader;
 				try
 				{
 					for (int i = 0; i < skipResults; i++)
 					{
-						if (!dataReader.Read())
+						if (!(await dataReaderDecorator.ReadAsync()))
 						{
 							break;
 						}
 					}
 					int num = 0;
-					while ((maxResults == -1 || num < maxResults) && dataReader.Read())
+					while ((maxResults == -1 || num < maxResults) && await dataReaderDecorator.ReadAsync())
 					{
 						object obj = this._resultStrategy.Process(request, ref dataReader, null);
 						if (obj != BaseStrategy.SKIP)
@@ -494,8 +544,8 @@ namespace IBatisNet.DataMapper.MappedStatements
 				}
 				finally
 				{
-					dataReader.Close();
-					dataReader.Dispose();
+					dataReaderDecorator.Close();
+					dataReaderDecorator.Dispose();
 				}
 				this.ExecutePostSelect(request);
 				this.RetrieveOutputParameters(request, session, iDbCommand, parameterObject);
@@ -564,6 +614,7 @@ namespace IBatisNet.DataMapper.MappedStatements
 
 		internal async Task<System.Collections.Generic.IList<T>> RunQueryForListAsync<T>(RequestScope request, ISqlMapSession session, object parameterObject, System.Collections.Generic.IList<T> resultObject, RowDelegate<T> rowDelegate)
 		{
+			//throw new Exception("11111");
 			System.Collections.Generic.IList<T> list = resultObject;
 
 			IDbCommandDecorator dbCommand = (IDbCommandDecorator)(request.IDbCommand);
@@ -581,12 +632,16 @@ namespace IBatisNet.DataMapper.MappedStatements
 						list = this._statement.CreateInstanceOfGenericListClass<T>();
 					}
 				}
+
 				IDataReader dataReader =(await iDbCommand.ExecuteReaderAsync());
+
 				IDataReaderDecorator dataReaderDecorator = (IDataReaderDecorator)dataReader;
+
 				try
 				{
 					do
 					{
+
 						if (rowDelegate == null)
 						{
 							while (await dataReaderDecorator.ReadAsync())
@@ -608,7 +663,7 @@ namespace IBatisNet.DataMapper.MappedStatements
 							}
 						}
 					}
-					while (dataReader.NextResult());
+					while (dataReaderDecorator.NextResult());
 				}
 				catch
 				{
@@ -616,8 +671,8 @@ namespace IBatisNet.DataMapper.MappedStatements
 				}
 				finally
 				{
-					dataReader.Close();
-					dataReader.Dispose();
+					dataReaderDecorator.Close();
+					dataReaderDecorator.Dispose();
 				}
 				this.ExecutePostSelect(request);
 				this.RetrieveOutputParameters(request, session, iDbCommand, parameterObject);

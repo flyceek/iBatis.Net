@@ -59,6 +59,8 @@ namespace IBatisNet.DataMapper.MappedStatements
 
 		T ExecuteQueryForObject<T>(ISqlMapSession session, object parameterObject);
 
+		Task<T> ExecuteQueryForObjectAsync<T>(ISqlMapSession session, object parameterObject);
+
 		T ExecuteQueryForObject<T>(ISqlMapSession session, object parameterObject, T resultObject);
 
 		System.Collections.IList ExecuteQueryForRowDelegate(ISqlMapSession session, object parameterObject, RowDelegate rowDelegate);
