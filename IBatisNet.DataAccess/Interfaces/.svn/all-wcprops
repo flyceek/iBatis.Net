@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Interfaces
+END
+IDao.cs
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Interfaces/IDao.cs
+END
+IDaoSessionHandler.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Interfaces/IDaoSessionHandler.cs
+END

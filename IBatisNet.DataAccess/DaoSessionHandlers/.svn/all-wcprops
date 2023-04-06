@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/DaoSessionHandlers
+END
+SimpleDaoSessionHandler.cs
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/DaoSessionHandlers/SimpleDaoSessionHandler.cs
+END
+SimpleDaoSession.cs
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/DaoSessionHandlers/SimpleDaoSession.cs
+END
+SqlMapDaoSessionHandler.cs
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/DaoSessionHandlers/SqlMapDaoSessionHandler.cs
+END
+SqlMapDaoSession.cs
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/DaoSessionHandlers/SqlMapDaoSession.cs
+END

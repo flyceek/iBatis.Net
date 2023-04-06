@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/100/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Configuration
+END
+Dao.cs
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Configuration/Dao.cs
+END
+DomDaoManagerBuilder.cs
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Configuration/DomDaoManagerBuilder.cs
+END
+DaoSessionHandler.cs
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Configuration/DaoSessionHandler.cs
+END
+DaoProxy.cs
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/100/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/Configuration/DaoProxy.cs
+END

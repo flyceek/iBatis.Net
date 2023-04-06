@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore
+END
+AbstractSessionStore.cs
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore/AbstractSessionStore.cs
+END
+HybridWebThreadSessionStore.cs
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore/HybridWebThreadSessionStore.cs
+END
+SessionStoreFactory .cs
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore/SessionStoreFactory%20.cs
+END
+ISessionStore.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore/ISessionStore.cs
+END
+WebSessionStore.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore/WebSessionStore.cs
+END
+CallContextSessionStore.cs
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/9/branches/ibatis-1-maintenance/src/IBatisNet.DataAccess/SessionStore/CallContextSessionStore.cs
+END
