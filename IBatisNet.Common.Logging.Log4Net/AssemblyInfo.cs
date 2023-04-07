@@ -7,3 +7,4 @@ using System.Security;
 
 [assembly: AssemblyVersion("1.0.0.1")]
 [assembly: AssemblyCompany("http://ibatis.apache.org/")]
+[assembly: AssemblyCopyright("Org.Paranora,By Paranora.")]
