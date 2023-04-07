@@ -79,15 +79,16 @@ namespace IBatisNet.DataAccess.Configuration
 		public static IDao NewInstance(Dao dao) 
 		{
 			ProxyGenerator proxyGenerator = new ProxyGenerator();
-			IInterceptor handler = new DaoProxy(dao);
-//			Type[] interfaces = {dao.DaoInterface, typeof(IDao)};
-		    return proxyGenerator.CreateInterfaceProxyWithTarget(dao.DaoInstance,handler);
+			IInterceptor interceptor = new DaoProxy(dao);
+            Type[] interfaces = { dao.DaoInterface, typeof(IDao) };
+			//return proxyGenerator.CreateInterfaceProxyWithTarget(dao.DaoInstance,interceptor);
+			return proxyGenerator.CreateProxy(interfaces, interceptor, dao.DaoInstance) as IDao;
 
 		}
 		#endregion
 
 		#region IInterceptor menbers
-        public void Intercept(IInvocation invocation)
+        public object Intercept(IInvocation invocation, params object[] args)
         {
 			Object result = null;
 
@@ -102,7 +103,7 @@ namespace IBatisNet.DataAccess.Configuration
 			{
 				try 
 				{
-                    result = invocation.Method.Invoke(_daoImplementation.DaoInstance, invocation.Arguments);
+                    result = invocation.Method.Invoke(_daoImplementation.DaoInstance, args);
 				} 
 				catch (Exception e) 
 				{
@@ -116,7 +117,7 @@ namespace IBatisNet.DataAccess.Configuration
 				{
 					try 
 					{
-                        result = invocation.Method.Invoke(_daoImplementation.DaoInstance, invocation.Arguments);
+                        result = invocation.Method.Invoke(_daoImplementation.DaoInstance, args);
 					} 
 					catch (Exception e) 
 					{
@@ -135,7 +136,7 @@ namespace IBatisNet.DataAccess.Configuration
 					try 
 					{
 						daoManager.OpenConnection();
-                        result = invocation.Method.Invoke(_daoImplementation.DaoInstance, invocation.Arguments);
+                        result = invocation.Method.Invoke(_daoImplementation.DaoInstance, args);
 					} 
 					catch (Exception e) 
 					{
@@ -155,7 +156,7 @@ namespace IBatisNet.DataAccess.Configuration
 			}
 			#endregion
 
-			
+			return result;
 		}
 
 		private Exception UnWrapException(Exception ex, string methodName) 
@@ -178,8 +179,8 @@ namespace IBatisNet.DataAccess.Configuration
 			}
 		}
 
-		#endregion
+        #endregion
 
 
-	}
+    }
 }
